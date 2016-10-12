@@ -38,27 +38,34 @@ public class Main {
 					int annee, vitesse;
 					float prix;
 					Voiture newcar = new Voiture();
+					System.out.println("INSERTION D'UN VEHICULE");
 					
+					System.out.println("");
 					System.out.println("Saissisez la marque");
 					marque = scan.nextLine();
 					newcar.setMarque(marque);
 					
+					System.out.println("");
 					System.out.println("Saissisez l'année");
 					annee = scan.nextInt();
 					newcar.setAnnee(annee);
 					
+					System.out.println("");
 					System.out.println("Saissisez le modele");
 					modele = scan.nextLine();
 					newcar.setModele(modele);
 					
+					System.out.println("");
 					System.out.println("Saissisez la couleur");
 					couleur = scan.nextLine();
 					newcar.setCouleur(couleur);
 					
+					System.out.println("");
 					System.out.println("Saissisez le prix");
 					prix = scan.nextFloat();
 					newcar.setPrix(prix);
 					
+					System.out.println("");
 					System.out.println("Saissisez le vitesse");
 					vitesse = scan.nextInt();
 					newcar.setVitesse(vitesse);
