@@ -3,8 +3,10 @@ package com.iia.btse2.Car.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.iia.btse2.Car.entity.Voiture;
 
 public class VoitureDAO implements IDao<Voiture>{
@@ -19,23 +21,11 @@ public class VoitureDAO implements IDao<Voiture>{
 
 	@Override
 	public boolean create(Voiture object) {
-		String req = "INSERT INTO Car(Marque, Annee, Modele, Couleur, Prix, Vitesse)"
-					+ " VALUES ('test', GETDATE(), 't', 't', 1, 1);";
-				
-				/*"INSERT INTO " + VoitureDAO.TABLE + " (" + VoitureDAO.MARQUE 
-													   + ", " + VoitureDAO.YEAR
-													   + ", " + VoitureDAO.MODEL
-													   + ", " + VoitureDAO.COLOR
-													   + ", " + VoitureDAO.PRICE
-													   + ", " + VoitureDAO.SPEED
-				+ ") "
-				+ "VALUES ('" + object.getMarque() + "','" + "GETDATE()"
-				+ "','" + object.getModele() + "','" + object.getCouleur() 
-				+ "','" + object.getPrix() + "','" + object.getVitesse()+ "')";*/
+		String req = "INSERT INTO Car (Marque, Annee, Modele, Couleur, Prix, Vitesse) VALUES ('test', GETDATE(), 't', 't', 1, 1);";
 
 		try {
 			PreparedStatement st = Connexion.getConnection().prepareStatement(req);
-			if (st.executeUpdate() == 1) {
+			if (st.executeUpdate(req) == 1) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -116,7 +106,8 @@ public class VoitureDAO implements IDao<Voiture>{
 	public List<Voiture> findAll() {
 		List<Voiture> clients = new ArrayList<Voiture>();
 
-		String req = String.format("SELECT * FROM %s", VoitureDAO.TABLE);
+		//String req = String.format("SELECT * FROM %s", VoitureDAO.TABLE);
+		String req = "SELECT * FROM Car";
 
 		try {
 			PreparedStatement st = Connexion.getConnection().prepareStatement(req);

@@ -12,11 +12,6 @@ public class Main {
 		// Création de la voiture DAO
 		VoitureDAO cDao = new VoitureDAO();
 
-		/*List<Voiture> car = cDao.findAll();
-		for (Voiture carlist : car) {
-			System.out.println(carlist.getID());
-		}*/
-
 		boolean result;
 		Scanner scan = new Scanner(System.in);
 		int application = 1;
@@ -41,21 +36,20 @@ public class Main {
 				choix = scan.nextInt();
 				switch (choix) {
 				case 1:
-					String marque, modele, couleur;
+					/*String marque, modele, couleur;
 					int annee, vitesse;
-					float prix;
+					float prix;*/
 					Voiture newcar = new Voiture();
+					result = cDao.create(newcar);
 					/*System.out.println("INSERTION D'UN VEHICULE");
 
 					System.out.println("");
 					System.out.println("Saissisez la marque");
-					marque = scan.nextLine();
-					newcar.setMarque(marque);
+					newcar.setMarque(scan.nextLine(marque));
 
 					System.out.println("");
 					System.out.println("Saissisez l'année");
-					annee = scan.nextInt();
-					newcar.setAnnee(annee);
+					newcar.setAnnee(scan.nextInt(annee));
 
 					System.out.println("");
 					System.out.println("Saissisez le modele");
@@ -77,13 +71,13 @@ public class Main {
 					vitesse = scan.nextInt();
 					newcar.setVitesse(vitesse);*/
 
-					result = cDao.create(newcar);
+					
 					break;
 
 				case 2:
 					Voiture carupdate;
+					int choixupdate = 0;
 					System.out.println("MODIFICATION D'UN VEHICULE");
-
 					System.out.println("");
 					System.out.println("Selectionner une voiture parmi celles de la base de données");
 					i = scan.nextInt();
@@ -96,17 +90,116 @@ public class Main {
 					System.out.println("Couleur : " + carupdate.getCouleur());
 					System.out.println("Prix : " + carupdate.getPrix());
 					System.out.println("Vitesse : " + carupdate.getVitesse());
+					System.out.println("");
+					System.out.println("Voulez-vous vraiment la modifier");
+					choixupdate = scan.nextInt();
+					switch (choixupdate) {
+					case 1:
+						
+						String updatemarque, updatemodele, updatecouleur;
+						int updateannee, updatevitesse;
+						float updateprix;
+
+						System.out.println("");
+						System.out.println("Saissisez la marque");
+						updatemarque = scan.nextLine();
+						carupdate.setMarque(updatemarque);
+
+						System.out.println("");
+						System.out.println("Saissisez l'année");
+						updateannee = scan.nextInt();
+						carupdate.setAnnee(updateannee);
+
+						System.out.println("");
+						System.out.println("Saissisez le modele");
+						updatemodele = scan.nextLine();
+						carupdate.setModele(updatemodele);
+
+						System.out.println("");
+						System.out.println("Saissisez la couleur");
+						updatecouleur = scan.nextLine();
+						carupdate.setCouleur(updatecouleur);
+
+						System.out.println("");
+						System.out.println("Saissisez le prix");
+						updateprix = scan.nextFloat();
+						carupdate.setPrix(updateprix);
+
+						System.out.println("");
+						System.out.println("Saissisez le vitesse");
+						updatevitesse = scan.nextInt();
+						carupdate.setVitesse(updatevitesse);
+						result = cDao.update(carupdate);
+						break;
+						
+					case 2:
+						System.out.println("ANNULER");
+						break;
+
+					default:
+						break;
+					}
 					break;
 
 				case 3:
-					System.out.println("Supprimer");
+					System.out.println("SUPPRESSION D'UNE VOITURE");
+					Voiture cardelete;
+					int choixdelete = 0;
+					System.out.println("MODIFICATION D'UN VEHICULE");
+					System.out.println("");
+					System.out.println("Selectionner une voiture parmi celles de la base de données");
+					i = scan.nextInt();
+					cardelete = (Voiture) cDao.findById(i);
+					System.out.println("");
+					System.out.println("Identifiant : " + cardelete.getID());
+					System.out.println("Marque : " + cardelete.getMarque());
+					System.out.println("Annee : " + cardelete.getAnnee());
+					System.out.println("Modéle : " + cardelete.getModele());
+					System.out.println("Couleur : " + cardelete.getCouleur());
+					System.out.println("Prix : " + cardelete.getPrix());
+					System.out.println("Vitesse : " + cardelete.getVitesse());
+					System.out.println("");
+					System.out.println("Voulez-vous vraiment la modifier");
+					choixdelete = scan.nextInt();
+					switch (choixdelete) {
+					case 1:
+						result = cDao.delete(cardelete);
+						break;
+
+					case 2:
+						System.out.println("ANNULER");
+						break;
+
+					default:
+						break;
+					}
 					break;
 
 				case 4:
-					System.out.println("Afficher");
+					Voiture cardisplay;
+					System.out.println("AFFICHAGE D'UNE VOITURE");
+					System.out.println("Selectionner une voiture parmi celles de la base de données");
+					i = scan.nextInt();
+					cardisplay = (Voiture) cDao.findById(i);
+					System.out.println("");
+					System.out.println("Identifiant : " + cardisplay.getID());
+					System.out.println("Marque : " + cardisplay.getMarque());
+					System.out.println("Annee : " + cardisplay.getAnnee());
+					System.out.println("Modéle : " + cardisplay.getModele());
+					System.out.println("Couleur : " + cardisplay.getCouleur());
+					System.out.println("Prix : " + cardisplay.getPrix());
+					System.out.println("Vitesse : " + cardisplay.getVitesse());
+					System.out.println("");
 					break;
 
 				case 5:
+					List<Voiture> car = cDao.findAll();
+					for (Voiture carlist : car) {
+						System.out.println(carlist.getID());
+					}
+					break;
+					
+				case 6:
 					application = 0;
 					break;
 

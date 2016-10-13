@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connexion {
-	private static final String URL = "jdbc:sqlserver://A15-16;databaseName=Voiture;";
+	private static final String URL = "jdbc:sqlserver://ANTOINE-PC;databaseName=Voiture;";
 	private static final String PASSWORD = "SQL2014";
 	private static final String LOGIN = "sa";
 	private static Connection connection;
