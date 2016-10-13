@@ -8,7 +8,7 @@ import java.util.List;
 import com.iia.btse2.Car.entity.Voiture;
 
 public class VoitureDAO implements IDao<Voiture>{
-	private static final String TABLE = "Voiture";
+	private static final String TABLE = "Car";
 	private static final String ID = "id";
 	private static final String MARQUE = "marque";
 	private static final String YEAR = "annee";
@@ -19,16 +19,19 @@ public class VoitureDAO implements IDao<Voiture>{
 
 	@Override
 	public boolean create(Voiture object) {
-		String req = "INSERT INTO " + VoitureDAO.TABLE + " (" + VoitureDAO.MARQUE 
+		String req = "INSERT INTO Car(Marque, Annee, Modele, Couleur, Prix, Vitesse)"
+					+ " VALUES ('test', GETDATE(), 't', 't', 1, 1);";
+				
+				/*"INSERT INTO " + VoitureDAO.TABLE + " (" + VoitureDAO.MARQUE 
 													   + ", " + VoitureDAO.YEAR
 													   + ", " + VoitureDAO.MODEL
 													   + ", " + VoitureDAO.COLOR
 													   + ", " + VoitureDAO.PRICE
 													   + ", " + VoitureDAO.SPEED
 				+ ") "
-				+ "VALUES ('" + object.getMarque() + "','" + object.getAnnee()
+				+ "VALUES ('" + object.getMarque() + "','" + "GETDATE()"
 				+ "','" + object.getModele() + "','" + object.getCouleur() 
-				+ "','" + object.getPrix() + "','" + object.getVitesse()+ "')";
+				+ "','" + object.getPrix() + "','" + object.getVitesse()+ "')";*/
 
 		try {
 			PreparedStatement st = Connexion.getConnection().prepareStatement(req);
@@ -44,7 +47,7 @@ public class VoitureDAO implements IDao<Voiture>{
 
 	@Override
 	public boolean update(Voiture object) {
-		String req = String.format("UPDATE %s SET %s=%s, %s=%s WHERE %s=?",
+		String req = String.format("UPDATE %s SET %s=%s, %s=%s, %s=%s, %s=%s, %s=%s, %s=%s WHERE %s=?",
 				VoitureDAO.TABLE,
 				VoitureDAO.MARQUE,
 				object.getMarque(),
