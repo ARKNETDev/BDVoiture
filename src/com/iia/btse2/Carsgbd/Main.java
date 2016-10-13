@@ -11,8 +11,8 @@ public class Main {
 	public static void main(String[] args) {
 		// Création de la voiture DAO
 		VoitureDAO cDao = new VoitureDAO();
-
-		boolean result;
+		Voiture Car = new Voiture();
+		boolean result;	
 		Scanner scan = new Scanner(System.in);
 		int application = 1;
 		int choix = 0;
@@ -36,29 +36,27 @@ public class Main {
 				choix = scan.nextInt();
 				switch (choix) {
 				case 1:
-					/*String marque, modele, couleur;
-					int annee, vitesse;
-					float prix;*/
-					Voiture newcar = new Voiture();
-					result = cDao.create(newcar);
+					String marque = null, modele = null, couleur = null;
+					int annee = 0, vitesse = 0;
+					float prix = 0;
+					//Voiture newcar = new Voiture();
+					result = cDao.create(Car);
+					
 					/*System.out.println("INSERTION D'UN VEHICULE");
 
 					System.out.println("");
 					System.out.println("Saissisez la marque");
-					newcar.setMarque(scan.nextLine(marque));
-
-					System.out.println("");
-					System.out.println("Saissisez l'année");
-					newcar.setAnnee(scan.nextInt(annee));
-
+					marque = scan.next();
+					newcar.setMarque(marque);
+					
 					System.out.println("");
 					System.out.println("Saissisez le modele");
-					modele = scan.nextLine();
+					modele = scan.next();
 					newcar.setModele(modele);
 
 					System.out.println("");
 					System.out.println("Saissisez la couleur");
-					couleur = scan.nextLine();
+					couleur = scan.next();
 					newcar.setCouleur(couleur);
 
 					System.out.println("");
@@ -70,7 +68,6 @@ public class Main {
 					System.out.println("Saissisez le vitesse");
 					vitesse = scan.nextInt();
 					newcar.setVitesse(vitesse);*/
-
 					
 					break;
 
@@ -102,7 +99,7 @@ public class Main {
 
 						System.out.println("");
 						System.out.println("Saissisez la marque");
-						updatemarque = scan.nextLine();
+						updatemarque = scan.next();
 						carupdate.setMarque(updatemarque);
 
 						System.out.println("");
@@ -112,12 +109,12 @@ public class Main {
 
 						System.out.println("");
 						System.out.println("Saissisez le modele");
-						updatemodele = scan.nextLine();
+						updatemodele = scan.next();
 						carupdate.setModele(updatemodele);
 
 						System.out.println("");
 						System.out.println("Saissisez la couleur");
-						updatecouleur = scan.nextLine();
+						updatecouleur = scan.next();
 						carupdate.setCouleur(updatecouleur);
 
 						System.out.println("");

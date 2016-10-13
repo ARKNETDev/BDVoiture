@@ -11,23 +11,26 @@ import com.iia.btse2.Car.entity.Voiture;
 
 public class VoitureDAO implements IDao<Voiture>{
 	private static final String TABLE = "Car";
-	private static final String ID = "id";
-	private static final String MARQUE = "marque";
-	private static final String YEAR = "annee";
-	private static final String MODEL = "modele";
-	private static final String COLOR = "color";
-	private static final String PRICE = "prix";
-	private static final String SPEED = "vitesse";
+	private static final String ID = "Identifiant";
+	private static final String MARQUE = "Marque";
+	private static final String YEAR = "Annee";
+	private static final String MODEL = "Modele";
+	private static final String COLOR = "Color";
+	private static final String PRICE = "Prix";
+	private static final String SPEED = "Vitesse";
 
 	@Override
 	public boolean create(Voiture object) {
-		String req = "INSERT INTO Car (Marque, Annee, Modele, Couleur, Prix, Vitesse) VALUES ('test', GETDATE(), 't', 't', 1, 1);";
+		String req = "INSERT INTO Car (Marque, Annee, Modele, Couleur, Prix, Vitesse) VALUES('t', GETDATE(), 't', 't', 1, 1)";
+		//String req = "INSERT INTO Car (Marque, Annee, Modele, Couleur, Prix, Vitesse) VALUES ('test', GETDATE(), 't', 't', 1, 1);";
 
 		try {
 			PreparedStatement st = Connexion.getConnection().prepareStatement(req);
 			if (st.executeUpdate(req) == 1) {
-				return true;
-			}
+				return true;}
+			/*Statement st = Connexion.getConnection().createStatement();
+			ResultSet result = st.executeQuery(req);*/
+			
 		} catch (SQLException e) {
 			System.out.println("erreur lors de l'insertion de la voiture");
 		}
@@ -87,11 +90,11 @@ public class VoitureDAO implements IDao<Voiture>{
 
 	@Override
 	public Voiture findById(int id) {
-		String req = String.format("SELECT * FROM %s WHERE %s=%d", VoitureDAO.TABLE, VoitureDAO.ID, id);
-
+		//String req = String.format("SELECT * FROM %s WHERE %s=%d", VoitureDAO.TABLE, VoitureDAO.ID, id);
+		String req = String.format("SELECT * FROM Car WHERE Identifiant = " + id);
 		try {
 			PreparedStatement st = Connexion.getConnection().prepareStatement(req);
-			ResultSet rs = st.executeQuery();
+			ResultSet rs = st.executeQuery(req);
 
 			if (rs.next()) {
 				return this.cursorToVoiture(rs);
