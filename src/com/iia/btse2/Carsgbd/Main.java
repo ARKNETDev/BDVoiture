@@ -150,22 +150,15 @@ public class Main {
 					System.out.println("SUPPRESSION D'UNE VOITURE");
 					Voiture cardelete;
 					int choixdelete = 0;
-					System.out.println("MODIFICATION D'UN VEHICULE");
+					voiture = (ArrayList<Voiture>) cDao.findAll();
+					for (Voiture carlist : voiture) {
+							displayCar(carlist);
+					}
 					System.out.println("");
 					System.out.println("Selectionner une voiture parmi celles de la base de données");
 					i = scan.nextInt();
 					cardelete = (Voiture) cDao.findById(i);
 					System.out.println("");
-					/*
-					 * System.out.println("Identifiant : " + cardelete.getID());
-					 * System.out.println("Marque : " + cardelete.getMarque());
-					 * System.out.println("Annee : " + cardelete.getAnnee());
-					 * System.out.println("Modéle : " + cardelete.getModele());
-					 * System.out.println("Couleur : " +
-					 * cardelete.getCouleur()); System.out.println("Prix : " +
-					 * cardelete.getPrix()); System.out.println("Vitesse : " +
-					 * cardelete.getVitesse());
-					 */
 					System.out.println("");
 					System.out.println("Voulez-vous vraiment la modifier");
 					choixdelete = scan.nextInt();
@@ -203,7 +196,7 @@ public class Main {
 				case 5:
 					voiture = (ArrayList<Voiture>) cDao.findAll();
 					for (Voiture carlist : voiture) {
-						System.out.println(carlist.getID());
+							displayCar(carlist);
 					}
 					break;
 
@@ -224,5 +217,11 @@ public class Main {
 			break;
 		}
 
+	}
+	
+	public static void displayCar (Voiture showcar){
+		System.out.println("Identifiant : " + showcar.getID() + " - Marque : " + showcar.getMarque() + " - Annee : " + showcar.getAnnee() + " - Modéle : " + showcar.getModele());
+		System.out.println(" - Couleur : " + showcar.getCouleur() + " - Prix : " + showcar.getPrix() + " - Vitesse : " + showcar.getVitesse());
+		System.out.println("");
 	}
 }

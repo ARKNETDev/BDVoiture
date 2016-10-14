@@ -21,12 +21,9 @@ public class VoitureDAO implements IDao<Voiture>{
 
 	@Override
 	public boolean create(Voiture object) {
-		//String req = "INSERT INTO Car (Marque, Annee, Modele, Couleur, Prix, Vitesse) VALUES('t', GETDATE(), 't', 't', 1, 1)";
 		String req = "INSERT INTO " + VoitureDAO.TABLE +" (" + VoitureDAO.MARQUE + ", " + VoitureDAO.YEAR + ", " + VoitureDAO.MODEL + ", " + VoitureDAO.COLOR + ", " + VoitureDAO.PRICE + ", " + VoitureDAO.SPEED + ")" 
-					//+ " VALUES ('" + object.getMarque()+ "', GETDATE(), '" + object.getModele()+ "', '" + object.getCouleur()+ "', " + object.getPrix()+ ", " + object.getVitesse()+ ");";
 						+ " VALUES('" + object.getMarque()+ "', GETDATE(), '" + object.getModele()+ "', '" + object.getCouleur()+ "', " + object.getPrix()+ ", " + object.getVitesse()+ ")";
 		try {
-			//PreparedStatement st = Connexion.getConnection().prepareStatement(req);
 			Statement st = Connexion.getConnection().createStatement();
 			if (st.executeUpdate(req) == 1) {
 				return true;}
@@ -110,10 +107,10 @@ public class VoitureDAO implements IDao<Voiture>{
 		List<Voiture> voitures = new ArrayList<Voiture>();
 
 		String req = String.format("SELECT * FROM %s", VoitureDAO.TABLE);
-		//String req = "SELECT * FROM Car";
+		
 
 		try {
-			Statement st = Connexion.getConnection().prepareStatement(req);
+			Statement st = Connexion.getConnection().createStatement();
 			//Statement st = Connexion.getConnection().createStatement();
 			ResultSet rs = st.executeQuery(req);
 
