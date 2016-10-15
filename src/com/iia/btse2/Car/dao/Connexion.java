@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connexion {
-	private static final String URL = "jdbc:sqlserver://A15-16;databaseName=Voiture;";
+	private static final String URL = "jdbc:sqlserver://ANTOINE-PC;databaseName=Vehicule;";
 	private static final String PASSWORD = "SQL2014";
 	private static final String LOGIN = "sa";
 	private static Connection connection;
@@ -18,10 +18,9 @@ public class Connexion {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
 			// Lance et récupère la connexion
-			Connexion.connection = DriverManager.getConnection(
-					Connexion.URL, Connexion.LOGIN, Connexion.PASSWORD);
+			Connexion.connection = DriverManager.getConnection(Connexion.URL, Connexion.LOGIN, Connexion.PASSWORD);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Impossible de charger le driver");
+			System.out.println("Impossible de charger le driver");		
 		} catch (SQLException e) {
 			System.out.println("Erreur lors de la connexion");
 		}
