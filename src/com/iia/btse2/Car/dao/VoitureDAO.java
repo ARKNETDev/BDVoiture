@@ -21,13 +21,13 @@ public class VoitureDAO implements IDao<Voiture>{
 
 	@Override
 	public boolean create(Voiture object) {
-		String req = "INSERT INTO " + VoitureDAO.TABLE +" (" + VoitureDAO.MARQUE + ", " + VoitureDAO.YEAR + ", " + VoitureDAO.MODEL + ", " + VoitureDAO.COLOR + ", " + VoitureDAO.PRICE + ", " + VoitureDAO.SPEED + ")" 
-						+ " VALUES('" + object.getMarque()+ "', GETDATE(), '" + object.getModele()+ "', '" + object.getCouleur()+ "', " + object.getPrix()+ ", " + object.getVitesse()+ ")";
+		String req = "INSERT INTO " + VoitureDAO.TABLE + "(" + VoitureDAO.MARQUE + ", " + VoitureDAO.YEAR + ", " + VoitureDAO.MODEL + ", " + VoitureDAO.COLOR + ", " + VoitureDAO.SPEED + ", " + VoitureDAO.PRICE + ")" 
+				+ " VALUES('" + object.getMarque()+ "', GETDATE(), '" + object.getModele()+ "', '" + object.getCouleur()+ "', " + object.getVitesse()+ ", " + object.getPrix()+ ");";
+				
 		try {
 			Statement st = Connexion.getConnection().createStatement();
 			if (st.executeUpdate(req) == 1) {
 				return true;}
-			
 		} catch (SQLException e) {
 			System.out.println("erreur lors de l'insertion de la voiture");
 		}
@@ -37,12 +37,10 @@ public class VoitureDAO implements IDao<Voiture>{
 
 	@Override
 	public boolean update(Voiture object) {
-		String req = String.format("UPDATE %s SET %s=%s, %s=%s, %s=%s, %s=%s, %s=%s, %s=%s WHERE %s=?",
+		String req = String.format("UPDATE %s SET %s=%s,Annee=GETDATE(), %s=%s, %s=%s, %s=%s, %s=%s WHERE %s=?",
 				VoitureDAO.TABLE,
 				VoitureDAO.MARQUE,
 				object.getMarque(),
-				VoitureDAO.YEAR,
-				object.getAnnee(),
 				VoitureDAO.MODEL,
 				object.getModele(),
 				VoitureDAO.COLOR,
@@ -51,14 +49,19 @@ public class VoitureDAO implements IDao<Voiture>{
 				object.getPrix(),
 				VoitureDAO.SPEED,
 				object.getVitesse(),
-				VoitureDAO.ID);
+				VoitureDAO.ID,
+				object.getID());
 		
 		try {
 			PreparedStatement st = Connexion.getConnection().prepareStatement(req);
-			st.setInt(1, object.getID());
+			st.setInt(object.getID(), 0);
 			if (st.executeUpdate() >= 1) {
 				return true;
 			}
+			/*Statement st = Connexion.getConnection().createStatement();
+			if (st.executeUpdate(req) >= 1) {
+				return true;}
+			*/
 		} catch (SQLException e) {
 			System.out.println("erreur lors de la mise à jour de la voiture");
 		}
@@ -88,7 +91,6 @@ public class VoitureDAO implements IDao<Voiture>{
 	@Override
 	public Voiture findById(int id) {
 		String req = "SELECT * FROM "+ VoitureDAO.TABLE +" WHERE " + VoitureDAO.ID + "= " + id ;
-		//String req = String.format("SELECT * FROM Car WHERE Identifiant = " + id);
 		try {
 			Statement st = Connexion.getConnection().createStatement();
 			ResultSet rs = st.executeQuery(req);
@@ -105,14 +107,10 @@ public class VoitureDAO implements IDao<Voiture>{
 	@Override
 	public List<Voiture> findAll() {
 		List<Voiture> voitures = new ArrayList<Voiture>();
-
 		String req = String.format("SELECT * FROM %s", VoitureDAO.TABLE);
-		
-
 		try {
-			Statement st = Connexion.getConnection().createStatement();
-			//Statement st = Connexion.getConnection().createStatement();
-			ResultSet rs = st.executeQuery(req);
+			PreparedStatement st = Connexion.getConnection().prepareStatement(req);
+			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
 				voitures.add(this.cursorToVoiture(rs));

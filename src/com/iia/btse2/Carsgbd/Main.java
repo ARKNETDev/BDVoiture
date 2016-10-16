@@ -13,8 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		// Création de la voiture DAO
 		VoitureDAO cDao = new VoitureDAO();
-		boolean result;
-		List<Voiture> car;
+		boolean result;	
 		Scanner scan = new Scanner(System.in);
 		int application = 1;
 		int choix = 0;
@@ -76,26 +75,17 @@ public class Main {
 					int choixupdate = 0;
 					System.out.println("MODIFICATION D'UN VEHICULE");
 					System.out.println("");
-					car = cDao.findAll();
+					List<Voiture> car = cDao.findAll();
 					for (Voiture carlist : car) {
-						System.out.println(carlist.getID());
+						displayCar(carlist);
 					}
 					System.out.println("");
 					System.out.println("Selectionner une voiture parmi celles de la base de données");
 					i = scan.nextInt();
 					carupdate = (Voiture) cDao.findById(i);
+					
 					System.out.println("");
-					/*
-					 * System.out.println("Identifiant : " + carupdate.getID());
-					 * System.out.println("Marque : " + carupdate.getMarque());
-					 * System.out.println("Annee : " + carupdate.getAnnee());
-					 * System.out.println("Modéle : " + carupdate.getModele());
-					 * System.out.println("Couleur : " +
-					 * carupdate.getCouleur()); System.out.println("Prix : " +
-					 * carupdate.getPrix()); System.out.println("Vitesse : " +
-					 * carupdate.getVitesse());
-					 */
-					System.out.println("");
+					System.out.println("1 - Oui | 2 - Annuler");
 					System.out.println("Voulez-vous vraiment la modifier");
 					choixupdate = scan.nextInt();
 					switch (choixupdate) {
@@ -109,12 +99,7 @@ public class Main {
 						System.out.println("Saissisez la marque");
 						updatemarque = scan.next();
 						carupdate.setMarque(updatemarque);
-
-						System.out.println("");
-						System.out.println("Saissisez l'année");
-						updateannee = scan.nextInt();
-						carupdate.setAnnee(updateannee);
-
+						
 						System.out.println("");
 						System.out.println("Saissisez le modele");
 						updatemodele = scan.next();
@@ -148,7 +133,7 @@ public class Main {
 
 				case 3:
 					System.out.println("SUPPRESSION D'UNE VOITURE");
-					Voiture cardelete;
+					Voiture cardelete = null;
 					int choixdelete = 0;
 					voiture = (ArrayList<Voiture>) cDao.findAll();
 					for (Voiture carlist : voiture) {
@@ -158,9 +143,10 @@ public class Main {
 					System.out.println("Selectionner une voiture parmi celles de la base de données");
 					i = scan.nextInt();
 					cardelete = (Voiture) cDao.findById(i);
+
 					System.out.println("");
-					System.out.println("");
-					System.out.println("Voulez-vous vraiment la modifier");
+					System.out.println("1 - Oui | 2 - Annuler");
+					System.out.println("Voulez-vous vraiment la supprimer");
 					choixdelete = scan.nextInt();
 					switch (choixdelete) {
 					case 1:
