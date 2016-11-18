@@ -2,23 +2,23 @@ package com.iia.btse2.Car.entity;
 
 public class Voiture {
 	
-	private int ID;
-	private String Marque;
-	private int Annee;
-	private String Modele;
-	private String Couleur;
-	private float Prix;
-	private int Vitesse;
+	private int id;
+	private String marque;
+	private int annee;
+	private String modele;
+	private String couleur;
+	private float prix;
+	private int vitesse;
 	
 	public Voiture(int iD, String marque, int annee, String modele, String couleur, float prix, int vitesse) {
 		super();
-		ID = iD;
-		Marque = marque;
-		Annee = annee;
-		Modele = modele;
-		Couleur = couleur;
-		Prix = prix;
-		Vitesse = vitesse;
+		this.id = iD;
+		this.marque = marque;
+		this.annee = annee;
+		this.modele = modele;
+		this.couleur = couleur;
+		this.prix = prix;
+		this.vitesse = vitesse;
 	}
 
 	public Voiture() {
@@ -26,59 +26,68 @@ public class Voiture {
 	}
 
 	public int getID() {
-		return ID;
+		return this.id;
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		this.id = iD;
 	}
 
 	public String getMarque() {
-		return Marque;
+		return marque;
 	}
 
 	public void setMarque(String marque) {
-		Marque = marque;
+		this.marque = marque;
 	}
 
 	public int getAnnee() {
-		return Annee;
+		return this.annee;
 	}
 
 	public void setAnnee(int annee) {
-		Annee = annee;
+		this.annee = annee;
 	}
 
 	public String getModele() {
-		return Modele;
+		return this.modele;
 	}
 
 	public void setModele(String modele) {
-		Modele = modele;
+		this.modele = modele;
 	}
 
 	public String getCouleur() {
-		return Couleur;
+		return this.couleur;
 	}
 
 	public void setCouleur(String couleur) {
-		Couleur = couleur;
+		this.couleur = couleur;
 	}
 
 	public float getPrix() {
-		return Prix;
+		return this.prix;
 	}
 
 	public void setPrix(float prix) {
-		Prix = prix;
+		this.prix = prix;
 	}
 
 	public int getVitesse() {
-		return Vitesse;
+		return this.vitesse;
 	}
 
 	public void setVitesse(int vitesse) {
-		Vitesse = vitesse;
+		this.vitesse = vitesse;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String value =  "Identifiant : " + this.id + " - Marque : " + this.marque + " - Modele :"
+		+ this.modele + " - Couleur : " + this.couleur + " - Annee : " + this.annee + " - Vitesse : " 
+		+ this.vitesse;
+		return value;
 	}
 	
 	

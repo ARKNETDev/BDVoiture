@@ -4,10 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import com.iia.btse2.Car.dao.VoitureDAO;
 import com.iia.btse2.Car.entity.Voiture;
 
-public class Main {
+public class Main extends JFrame{
+	MainWindow MainWin = new MainWindow();
+	public void MainWindow(){
+		this.MainWin.setTitle("Gestionnaire de voiture");
+		this.MainWin.setSize(500, 500);
+		this.MainWin.setVisible(true);
+	}
 	private static ArrayList<Voiture> voiture;
 
 	public static void main(String[] args) {

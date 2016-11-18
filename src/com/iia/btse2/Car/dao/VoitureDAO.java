@@ -22,7 +22,7 @@ public class VoitureDAO implements IDao<Voiture>{
 	@Override
 	public boolean create(Voiture object) {
 		String req = "INSERT INTO " + VoitureDAO.TABLE + "(" + VoitureDAO.MARQUE + ", " + VoitureDAO.YEAR + ", " + VoitureDAO.MODEL + ", " + VoitureDAO.COLOR + ", " + VoitureDAO.SPEED + ", " + VoitureDAO.PRICE + ")" 
-				+ " VALUES('" + object.getMarque()+ "', GETDATE(), '" + object.getModele()+ "', '" + object.getCouleur()+ "', " + object.getVitesse()+ ", " + object.getPrix()+ ");";
+				+ " VALUES('" + object.getMarque()+ "'," + object.getAnnee()+ ", '" + object.getModele()+ "', '" + object.getCouleur()+ "', " + object.getVitesse()+ ", " + object.getPrix()+ ");";
 				
 		try {
 			Statement st = Connexion.getConnection().createStatement();
