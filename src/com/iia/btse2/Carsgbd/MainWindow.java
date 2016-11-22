@@ -37,7 +37,7 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 172, 233);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,8 +61,17 @@ public class MainWindow extends JFrame {
 		GridBagConstraints gbc_btnReadCar = new GridBagConstraints();
 		gbc_btnReadCar.insets = new Insets(0, 0, 5, 0);
 		gbc_btnReadCar.gridx = 1;
-		gbc_btnReadCar.gridy = 3;
+		gbc_btnReadCar.gridy = 2;
 		contentPane.add(btnReadCar, gbc_btnReadCar);
+		
+		btnReadCar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {		
+				ReadWindow readwindow = new ReadWindow();
+				readwindow.setVisible(true);		
+			}
+		});
 		
 		JButton btnCancel = new JButton("CANCEL");
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
@@ -77,15 +86,6 @@ public class MainWindow extends JFrame {
 				
 				InsertWindow insertwindow = new InsertWindow();
 				insertwindow.setVisible(true);
-			}
-		});
-		
-		btnReadCar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {		
-				ReadWindow readwindow = new ReadWindow();
-				readwindow.setVisible(true);		
 			}
 		});
 		

@@ -48,15 +48,15 @@ public class InsertWindow extends JFrame {
 	 */
 	public InsertWindow() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 497, 354);
+		setBounds(100, 100, 497, 404);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblMarque = new JLabel("Marque");
@@ -165,15 +165,26 @@ public class InsertWindow extends JFrame {
 		GridBagConstraints gbc_btnInsert = new GridBagConstraints();
 		gbc_btnInsert.insets = new Insets(0, 0, 0, 5);
 		gbc_btnInsert.gridx = 2;
-		gbc_btnInsert.gridy = 9;
+		gbc_btnInsert.gridy = 10;
 		contentPane.add(btnInsert, gbc_btnInsert);
 		
 		JButton btnCancel = new JButton("Cancel");
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancel.gridx = 5;
-		gbc_btnCancel.gridy = 9;
+		gbc_btnCancel.gridy = 10;
 		contentPane.add(btnCancel, gbc_btnCancel);
+		
+		btnCancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getSource() == btnCancel){
+					InsertWindow.this.setVisible(false);
+				}
+			}
+		});
 		
 		btnInsert.addActionListener(new ActionListener() {
 			Voiture insertcar = new Voiture();
@@ -184,22 +195,11 @@ public class InsertWindow extends JFrame {
 					insertcar.setMarque(InsertWindow.this.txt_Marque.getText());
 					insertcar.setModele(InsertWindow.this.txt_Modele.getText());
 					insertcar.setCouleur(InsertWindow.this.txt_Couleur.getText());
-					insertcar.setAnnee(Integer.parseInt(InsertWindow.this.txt_Annee.getText()));
+					insertcar.setAnnee(InsertWindow.this.txt_Annee.getText());
 					insertcar.setVitesse(Integer.parseInt(InsertWindow.this.txt_Vitesse.getText()));
 					insertcar.setPrix(Integer.parseInt(InsertWindow.this.txt_Prix.getText()));
 					cDao.create(insertcar);
 				}	
-			}
-		});
-		
-		btnCancel.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if(e.getSource() == btnCancel){
-					InsertWindow.this.setVisible(false);
-				}
 			}
 		});
 		
