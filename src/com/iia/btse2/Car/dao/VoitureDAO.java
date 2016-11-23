@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.iia.btse2.Car.entity.Voiture;
-import com.iia.btse2.Carsgbd.InsertWindow;
 
 public class VoitureDAO implements IDao<Voiture>{
 	private static final String TABLE = "Car";

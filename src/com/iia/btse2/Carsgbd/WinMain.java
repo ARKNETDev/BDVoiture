@@ -120,14 +120,14 @@ public class WinMain extends JFrame {
 		btnUpdateCar.addActionListener(new ActionListener() {
 			Voiture updatecar = new Voiture();
 			public void actionPerformed(ActionEvent e) {
-				
+				updatecar.getID();
 				updatecar.setMarque((WinMain.this.Txt_Marque.getText()));
 				updatecar.setModele((WinMain.this.Txt_Modele.getText()));
 				updatecar.setCouleur((WinMain.this.Txt_Couleur.getText()));
 				updatecar.setAnnee((WinMain.this.Txt_Annee.getText()));
 				updatecar.setVitesse(Integer.parseInt(WinMain.this.Txt_Vitesse.getText()));
 				updatecar.setPrix(Integer.parseInt(WinMain.this.Txt_Prix.getText()));
-				updatecar(comboBox.getSelectedItem().toString());
+				cDao.update(updatecar);
 			}
 		});
 		menuBar.add(btnUpdateCar);
@@ -359,7 +359,7 @@ public class WinMain extends JFrame {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("erreur lors de la récupération de l'ID de la voiture");
+			System.out.println("erreur lors de la modification de la voiture");
 		}
 	}
 }
