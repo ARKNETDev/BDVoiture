@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.iia.btse2.Car.entity.Voiture;
+import com.iia.btse2.Carsgbd.InsertWindow;
 
 public class VoitureDAO implements IDao<Voiture>{
 	private static final String TABLE = "Car";
@@ -22,7 +23,7 @@ public class VoitureDAO implements IDao<Voiture>{
 	@Override
 	public boolean create(Voiture object) {
 		String req = "INSERT INTO " + VoitureDAO.TABLE + "(" + VoitureDAO.MARQUE + ", " + VoitureDAO.YEAR + ", " + VoitureDAO.MODEL + ", " + VoitureDAO.COLOR + ", " + VoitureDAO.SPEED + ", " + VoitureDAO.PRICE + ")" 
-				+ " VALUES('" + object.getMarque()+ "'," + object.getAnnee()+ ", '" + object.getModele()+ "', '" + object.getCouleur()+ "', " + object.getVitesse()+ ", " + object.getPrix()+ ");";
+				+ " VALUES('" + object.getMarque()+ "', '" + object.getAnnee() + "', '" + object.getModele()+ "', '" + object.getCouleur()+ "', " + object.getVitesse()+ ", " + object.getPrix()+ ");";
 				
 		try {
 			Statement st = Connexion.getConnection().createStatement();
@@ -53,15 +54,15 @@ public class VoitureDAO implements IDao<Voiture>{
 				object.getID());
 		
 		try {
-			PreparedStatement st = Connexion.getConnection().prepareStatement(req);
+			/*PreparedStatement st = Connexion.getConnection().prepareStatement(req);
 			st.setInt(object.getID(), 0);
 			if (st.executeUpdate() >= 1) {
 				return true;
-			}
-			/*Statement st = Connexion.getConnection().createStatement();
+			}*/
+			Statement st = Connexion.getConnection().createStatement();
 			if (st.executeUpdate(req) >= 1) {
 				return true;}
-			*/
+			
 		} catch (SQLException e) {
 			System.out.println("erreur lors de la mise à jour de la voiture");
 		}
@@ -131,7 +132,7 @@ public class VoitureDAO implements IDao<Voiture>{
 			voiture = new Voiture();
 			voiture.setID(resultSet.getInt(VoitureDAO.ID));
 			voiture.setMarque(resultSet.getString(VoitureDAO.MARQUE));
-			voiture.setAnnee(resultSet.getInt(VoitureDAO.YEAR));
+			voiture.setAnnee(resultSet.getString(VoitureDAO.YEAR));
 			voiture.setModele(resultSet.getString(VoitureDAO.MODEL));
 			voiture.setCouleur(resultSet.getString(VoitureDAO.COLOR));
 			voiture.setPrix(resultSet.getFloat(VoitureDAO.PRICE));
@@ -142,4 +143,6 @@ public class VoitureDAO implements IDao<Voiture>{
 
 		return voiture;
 	}
+	
+	
 }

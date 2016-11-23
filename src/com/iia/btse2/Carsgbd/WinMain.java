@@ -88,48 +88,21 @@ public class WinMain extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == btnInsertcar) {
 
-					if (Txt_Marque == null) {
-						JOptionPane.showMessageDialog(null, "Champs manquants");
-					}
-					if (Txt_Modele.getText() == "") {
-						JOptionPane.showMessageDialog(null, "Champs manquants");
-					}
-					if (Txt_Couleur.getText() == "") {
-						JOptionPane.showMessageDialog(null, "Champs manquants");
-					}
-					if (Txt_Annee.getText() == "") {
-						JOptionPane.showMessageDialog(null, "Champs manquants");
-					}
-					if (Txt_Vitesse.getText() == "") {
-						JOptionPane.showMessageDialog(null, "Champs manquants");
-					}
-					if (Txt_Prix.getText() == "") {
-						JOptionPane.showMessageDialog(null, "Champs manquants");
-					} else {
-						insertcar.setMarque(WinMain.this.Txt_Marque.getText());
-						insertcar.setModele(WinMain.this.Txt_Modele.getText());
-						insertcar.setCouleur(WinMain.this.Txt_Couleur.getText());
-						insertcar.setAnnee(WinMain.this.Txt_Annee.getText());
-						insertcar.setVitesse(Integer.parseInt(WinMain.this.Txt_Vitesse.getText()));
-						insertcar.setPrix(Integer.parseInt(WinMain.this.Txt_Prix.getText()));
-						cDao.create(insertcar);
-						cDao.findAll().toArray();
-						JOptionPane.showMessageDialog(null, "Element inséré");
-
-					}
+					insertcar.setMarque(WinMain.this.Txt_Marque.getText());
+					insertcar.setModele(WinMain.this.Txt_Modele.getText());
+					insertcar.setCouleur(WinMain.this.Txt_Couleur.getText());
+					insertcar.setAnnee(WinMain.this.Txt_Annee.getText());
+					insertcar.setVitesse(Integer.parseInt(WinMain.this.Txt_Vitesse.getText()));
+					insertcar.setPrix(Integer.parseInt(WinMain.this.Txt_Prix.getText()));
+					cDao.create(insertcar);
+					cDao.findAll().toArray();
+					JOptionPane.showMessageDialog(null, "Element inséré");
 
 				}
 			}
 		});
 
 		menuBar.add(btnInsertcar);
-
-		JButton btnUpdateCar = new JButton("UPDATE CAR");
-		btnUpdateCar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		menuBar.add(btnUpdateCar);
 
 		JButton btnDeleteCar = new JButton("DELETE CAR");
 		btnDeleteCar.addActionListener(new ActionListener() {
@@ -142,6 +115,22 @@ public class WinMain extends JFrame {
 
 		});
 		menuBar.add(btnDeleteCar);
+		
+		JButton btnUpdateCar = new JButton("UPDATE CAR");
+		btnUpdateCar.addActionListener(new ActionListener() {
+			Voiture updatecar = new Voiture();
+			public void actionPerformed(ActionEvent e) {
+				
+				updatecar.setMarque((WinMain.this.Txt_Marque.getText()));
+				updatecar.setModele((WinMain.this.Txt_Modele.getText()));
+				updatecar.setCouleur((WinMain.this.Txt_Couleur.getText()));
+				updatecar.setAnnee((WinMain.this.Txt_Annee.getText()));
+				updatecar.setVitesse(Integer.parseInt(WinMain.this.Txt_Vitesse.getText()));
+				updatecar.setPrix(Integer.parseInt(WinMain.this.Txt_Prix.getText()));
+				updatecar(comboBox.getSelectedItem().toString());
+			}
+		});
+		menuBar.add(btnUpdateCar);
 
 		JButton btnExit = new JButton("EXIT");
 		menuBar.add(btnExit);
@@ -348,5 +337,29 @@ public class WinMain extends JFrame {
 			System.out.println("erreur lors de la récupération de l'ID de la voiture");
 		}
 		return;
+	}
+
+	public void updatecar(String id){
+		String req = String.format("UPDATE Car SET Marque= "+Txt_Marque.getText()+
+				",Annee="+Txt_Annee.getText()+
+				", Modele="+Txt_Modele.getText()+
+				", Couleur="+Txt_Couleur.getText()+
+				", Vitesse="+Txt_Vitesse.getText()+
+				", Prix="+Txt_Prix.getText()+
+				" WHERE Id= "+WinMain.this.comboBox.getSelectedIndex()+ ");");
+		try {
+			Statement st = Connexion.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(req);
+			if (st.executeUpdate(req) == 1) {
+				while (rs.next()) {
+					String Marque = "dedz";
+					Marque = Txt_Marque.getText();
+				}
+				return;
+			}
+
+		} catch (SQLException e) {
+			System.out.println("erreur lors de la récupération de l'ID de la voiture");
+		}
 	}
 }

@@ -4,13 +4,13 @@ public class Voiture {
 	
 	private int id;
 	private String marque;
-	private int annee;
+	private String annee;
 	private String modele;
 	private String couleur;
 	private float prix;
 	private int vitesse;
 	
-	public Voiture(int iD, String marque, int annee, String modele, String couleur, float prix, int vitesse) {
+	public Voiture(int iD, String marque, String annee, String modele, String couleur, float prix, int vitesse) {
 		super();
 		this.id = iD;
 		this.marque = marque;
@@ -41,11 +41,11 @@ public class Voiture {
 		this.marque = marque;
 	}
 
-	public int getAnnee() {
+	public String getAnnee() {
 		return this.annee;
 	}
 
-	public void setAnnee(int annee) {
+	public void setAnnee(String annee) {
 		this.annee = annee;
 	}
 
